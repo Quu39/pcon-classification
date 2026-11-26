@@ -1,0 +1,29 @@
+name: exp002
+description: 周辺文脈 m=128（512×512 をそのまま入力）
+model:
+  name: resnet18
+input:
+  margin: 128
+  resize: null
+train:
+  epochs: 10
+  batch_size: 64
+  lr: 1.0e-3
+  weight_decay: 0.05
+  warmup_epochs: 1
+  min_lr_factor: 0.01
+  pos_fraction: 0.2
+  amp_dtype: bf16
+  seed: 42
+aug:
+  rot90: true
+  hflip: 0.5
+  vflip: 0.5
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.3
+  hue_deg: 15
+  channel_gain: 0.08
+  grayscale_p: 0.1
+eval:
+  batch_size: 128

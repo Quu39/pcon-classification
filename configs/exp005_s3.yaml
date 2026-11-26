@@ -1,0 +1,31 @@
+name: exp005_s3
+description: exp003 の global average pooling を中央 4×4（中央タイル相当）の pooling に置換（seed 3042）
+model:
+  name: resnet18
+  pool: center
+  center_frac: 0.3333333
+input:
+  margin: 256
+  resize: 384
+train:
+  epochs: 10
+  batch_size: 64
+  lr: 1.0e-3
+  weight_decay: 0.05
+  warmup_epochs: 1
+  min_lr_factor: 0.01
+  pos_fraction: 0.2
+  amp_dtype: bf16
+  seed: 3042
+aug:
+  rot90: true
+  hflip: 0.5
+  vflip: 0.5
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.3
+  hue_deg: 15
+  channel_gain: 0.08
+  grayscale_p: 0.1
+eval:
+  batch_size: 128

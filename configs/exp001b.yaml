@@ -1,0 +1,26 @@
+name: exp001b
+description: exp001 を 10 epoch に（Step 2 の比較基準・最終epoch評価あり）
+model:
+  name: resnet18
+train:
+  epochs: 10
+  batch_size: 64
+  lr: 1.0e-3
+  weight_decay: 0.05
+  warmup_epochs: 1
+  min_lr_factor: 0.01
+  pos_fraction: 0.2      # WeightedRandomSampler で 陽性:陰性 ≒ 1:4、1 epoch = train fold の枚数
+  amp_dtype: bf16
+  seed: 42
+aug:
+  rot90: true
+  hflip: 0.5
+  vflip: 0.5
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.3
+  hue_deg: 15
+  channel_gain: 0.08     # 写真ごとの青み・黄みの色かぶり
+  grayscale_p: 0.1
+eval:
+  batch_size: 256

@@ -1,0 +1,24 @@
+# SDNET2018 のルート（W/CW, W/UW を含むフォルダ。SDNET2018/SDNET2018/W のように一段深い場合も自動で探す）
+# 同じフォルダに D/CD, D/UD（橋梁床版）と P/CP, P/UP（舗装）もある（Step 3-d の事前学習用）
+# 件数: W/CW 3,851  W/UW 14,287（計 18,138 = train+test）  D/CD 2,025  D/UD 11,595  P/CP 2,608  P/UP 21,726
+sdnet_root: ""   # ← SDNET2018 を置いたパスに書き換える（例: "D:/data/SDNET2018"）
+
+seed: 42
+folds_seed: 42      # outputs/folds.csv の割り当て（Step 1 で固定。以後変えない）
+
+paths:
+  train_label: data/train_label.csv
+  test_list: data/test.txt
+  sample_submission: data/sample_submission.csv
+  cache_dir: outputs/cache          # uint8 の .npy キャッシュ（train ≒ 2.0GB, test ≒ 1.6GB）
+  eda_dir: outputs/eda
+  folds: outputs/folds.csv          # Step 1 で作成
+
+# 元写真の並び（Step 0 で検証）: タイル番号 i → row=(i-1)//n_cols, col=(i-1)%n_cols
+grid:
+  tile_size: 256
+  n_cols: 18
+  n_rows: 14
+
+cache:
+  num_threads: 8
